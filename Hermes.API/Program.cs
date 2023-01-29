@@ -1,3 +1,5 @@
+using Hermes.Application.Abstractions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,6 +18,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//Dependency Injection
+app.Services.AddScoped<IRegistrationService, RegistrationService>();
 
 app.UseHttpsRedirection();
 

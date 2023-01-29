@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hermes", "Hermes\Hermes.csproj", "{08C1E8D1-831B-4EF4-8EFA-25499994DD11}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hermes.Models", "Hermes.Models\Hermes.Models.csproj", "{EB42977F-CF6A-4B70-BCA0-CF2BFC744047}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hermes.Domain", "Hermes.Models\Hermes.Domain.csproj", "{EB42977F-CF6A-4B70-BCA0-CF2BFC744047}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hermes.API", "Hermes.API\Hermes.API.csproj", "{82445092-49A2-487A-AFEF-C963CB39E864}"
 EndProject

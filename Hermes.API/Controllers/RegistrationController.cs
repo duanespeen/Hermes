@@ -6,16 +6,10 @@ namespace Hermes.API.Controllers
     public class RegistrationController : Controller
     {
         private readonly IRegistrationService _registrationService;
-        private readonly IEmailService _emailService;
-        private readonly IPasswordService _passwordService;
-        private readonly IJWTService _JWTService;
 
         public RegistrationController(IRegistrationService registrationService, IEmailService emailService, IPasswordService passwordService, IJWTService jWTService)
         {
             _registrationService = registrationService;
-            _emailService = emailService;
-            _passwordService = passwordService;
-            _JWTService = jWTService;
         }
         
         [HttpPost]

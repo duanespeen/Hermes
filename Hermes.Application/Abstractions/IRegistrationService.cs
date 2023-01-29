@@ -3,12 +3,8 @@ using Hermes.Domain.ViewModels;
 
 namespace Hermes.Application.Abstractions
 {
-    public class IRegistrationService
-    {
-
-        public Task<User> RegisterAsync(RegistrationViewModel model)
-        {
-            throw new NotImplementedException();
-        }
+    public interface IRegistrationService
+    {   
+        public Task<User> RegisterAsync(RegistrationViewModel model);
     }
 }
