@@ -1,4 +1,5 @@
 ﻿using Hermes.Application.Abstractions;
+using Hermes.Domain.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hermes.API.Controllers
@@ -7,23 +8,21 @@ namespace Hermes.API.Controllers
     {
         private readonly IRegistrationService _registrationService;
 
-        public RegistrationController(IRegistrationService registrationService, IEmailService emailService, IPasswordService passwordService, IJWTService jWTService)
+        public RegistrationController(IRegistrationService registrationService)
         {
             _registrationService = registrationService;
         }
         
         [HttpPost]
-        [Route("api/registration")]
-        public Task<IActionResult> Register(RegistrationViewModel model)
+        [Route("api/register")]
+        public async Task<IActionResult> Register(RegistrationViewModel model)
         {
             var result = await _registrationService.RegisterAsync(model);
-            if (result.Success)
+            if (result.Item1 is not null)
             {
-                var token = _JWTService.GenerateToken(result.Data);
-                return Ok(new { token });
+                return Ok(result.Item1);
             }
-
-            return BadRequest(result);
+            return BadRequest(result.Item2);
         }
     }
 }

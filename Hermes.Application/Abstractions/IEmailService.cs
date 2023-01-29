@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Hermes.Application.Abstractions
 {
-    internal class IRegistrationService
+    public interface IEmailService
     {
+        Task SendEmailAsync(string email, string subject, string message);
     }
 }

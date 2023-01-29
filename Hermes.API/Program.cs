@@ -1,4 +1,6 @@
 using Hermes.Application.Abstractions;
+using Hermes.Database;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,17 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSignalR();
 
+//Configure Database
+builder.Services.AddDbContext<HermesContext>(options =>
+    options.UseSqlite("Data Source=Hermes.db"));
+
+//Create database if it doesn't exist
+builder.Services.BuildServiceProvider().GetService<HermesContext>().Database.EnsureCreated();
+
+//Dependency Injection
+builder.Services.AddScoped<IRegistrationService, RegistrationService>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -18,9 +31,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-//Dependency Injection
-app.Services.AddScoped<IRegistrationService, RegistrationService>();
 
 app.UseHttpsRedirection();
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hermes.Application.Abstractions
 {
-    internal class IRegistrationService
+    public interface IJWTService
     {
     }
 }

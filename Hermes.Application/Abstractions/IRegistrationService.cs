@@ -5,6 +5,6 @@ namespace Hermes.Application.Abstractions
 {
     public interface IRegistrationService
     {   
-        public Task<User> RegisterAsync(RegistrationViewModel model);
+        public Task<(User?, string?)> RegisterAsync(RegistrationViewModel model);
     }
 }

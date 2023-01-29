@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hermes.Domain", "Hermes.Mod
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hermes.API", "Hermes.API\Hermes.API.csproj", "{82445092-49A2-487A-AFEF-C963CB39E864}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hermes.Application", "Hermes.Application\Hermes.Application.csproj", "{D76BF59E-2759-42DA-BEAB-71448EAFF912}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hermes.Application", "Hermes.Application\Hermes.Application.csproj", "{D76BF59E-2759-42DA-BEAB-71448EAFF912}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hermes.Database", "Hermes.Database\Hermes.Database.csproj", "{AA02335B-3EC0-4256-A5FD-CA1432002EAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D76BF59E-2759-42DA-BEAB-71448EAFF912}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D76BF59E-2759-42DA-BEAB-71448EAFF912}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D76BF59E-2759-42DA-BEAB-71448EAFF912}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA02335B-3EC0-4256-A5FD-CA1432002EAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA02335B-3EC0-4256-A5FD-CA1432002EAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA02335B-3EC0-4256-A5FD-CA1432002EAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA02335B-3EC0-4256-A5FD-CA1432002EAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
