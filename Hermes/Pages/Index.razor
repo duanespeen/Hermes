@@ -1,6 +1,8 @@
 ﻿@page "/"
+@using Hermes.Domain.ViewModels;
 <PageTitle>Index</PageTitle>
 
+@*
 <div class="w-full h-screen flex items-center justify-center">
     <div class="max-w-xs items-center">
         <div class="bg-zinc-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -14,12 +16,38 @@
         </div>
     </div>
 </div>
+*@
+
+<EditForm class="w-full h-screen flex items-center justify-center" Model="registrationViewModel" OnValidSubmit="@HandleValidSubmit">
+
+    <div class="max-w-xs items-center">
+        <div class="bg-zinc-800 shadow-md rounded px-8 pt-6 pb-8">
+            <div id="validation" class="text-red-600">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+            </div>
+            <div class="form-group">
+                <label class="block text-neutral-100 text-sm font-bold mb-1" for="Username">Username</label>
+                <InputText class="w-48 shadow appearance-none bg-zinc-200 border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-2" id="Username" @bind-Value="registrationViewModel.Username" />
+            </div>
+            <div class="form-group">
+                <label class="block text-neutral-100 text-sm font-bold mb-1" for="Password">Password</label>
+                <InputText class="w-48 shadow appearance-none bg-zinc-200 border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-2" type="password" id="Password" @bind-Value="registrationViewModel.Password" />
+            </div>
+            <div class="form-group">
+                <label class="block text-neutral-100 text-sm font-bold mb-1" for="ConfirmPassword">Confirm Password</label>
+                <InputText class="w-48 shadow appearance-none bg-zinc-200 border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-2" type="password" id="ConfirmPassword" @bind-Value="registrationViewModel.ConfirmPassword" />
+            </div>
+            <button class="w-48 bg-purple-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Register</button>
+        </div>
+    </div>
+</EditForm>
 
 @code {
-    private string UsernameInput;
+    private RegistrationViewModel registrationViewModel = new();
 
-    void SubmitUsername()
+    void HandleValidSubmit()
     {
-        Console.WriteLine(UsernameInput);
+        Console.WriteLine(registrationViewModel.ConfirmPassword);
     }
 }

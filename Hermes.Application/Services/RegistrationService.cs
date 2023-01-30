@@ -25,8 +25,7 @@ namespace Hermes.Application.Abstractions
         public async Task<(User?, string?)> RegisterAsync(RegistrationViewModel model)
         {
             var duplicate = _context.Users.FirstOrDefault(u =>
-                u.NormalizedUsername == model.Email.ToUpper()
-                || u.NormalizedEmail == model.Username.ToUpper()
+                u.NormalizedUsername == model.Username.ToUpper()
             );
 
             if (duplicate is not null)
@@ -34,7 +33,7 @@ namespace Hermes.Application.Abstractions
                 return (null, "Already exists!");
             }
 
-            var user = new User() { Username = model.Username, Email = model.Email, Password = model.Password, NormalizedEmail = model.Email.ToUpper(), NormalizedUsername = model.Username.ToUpper() };
+            var user = new User() { Username = model.Username, Password = model.Password, NormalizedUsername = model.Username.ToUpper() };
             _context.Add(user);
             await _context.SaveChangesAsync();
             return (user, null);

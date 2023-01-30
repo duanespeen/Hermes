@@ -12,10 +12,6 @@ namespace Hermes.Domain.ViewModels
         [Required]
         [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long", MinimumLength = 3)]
         public string Username { get; set; }
-
-        [Required]
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
-        public string Email { get; set; }
         
         [Required]
         [StringLength(128, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 12)]
