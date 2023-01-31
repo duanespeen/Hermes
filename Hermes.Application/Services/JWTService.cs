@@ -20,10 +20,13 @@ namespace Hermes.Application.Services
         }
         public JwtSecurityToken CreateJWT(User user)
         {
+            if (user is null) return null;
+
             Claim[] claims = new[]{
                     new Claim(JwtRegisteredClaimNames.Sub, _config["Jwt:Subject"]),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                    new Claim(JwtRegisteredClaimNames.Exp, DateTime.UtcNow.AddMinutes(10).ToString()),
                     new Claim("username", user.Username),
                     new Claim("id", user.Id.ToString())
                 };
@@ -38,6 +41,11 @@ namespace Hermes.Application.Services
                 signingCredentials: creds
             );
             return token;
+        }
+
+        public string ReadJWT(JwtSecurityToken token)
+        { 
+            return token == null ? null : token.Subject;
         }
     }
 }

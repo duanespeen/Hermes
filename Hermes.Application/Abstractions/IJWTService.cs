@@ -7,5 +7,6 @@ namespace Hermes.Application.Abstractions
     public interface IJWTService
     {
         public JwtSecurityToken CreateJWT(User user);
+        public string ReadJWT(JwtSecurityToken token);
     }
 }

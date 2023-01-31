@@ -3,8 +3,9 @@ using Hermes.Domain.ViewModels;
 using Hermes.Database;
 using LanguageExt.Common;
 using LanguageExt;
+using Hermes.Application.Abstractions;
 
-namespace Hermes.Application.Abstractions
+namespace Hermes.Application.Services
 {
     public class RegistrationService : IRegistrationService
     {
