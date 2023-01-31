@@ -18,11 +18,10 @@ namespace Hermes.API.Controllers
         public async Task<IActionResult> Register(RegistrationViewModel model)
         {
             var result = await _registrationService.RegisterAsync(model);
-            if (result.Item1 is not null)
-            {
-                return Ok(result.Item1);
-            }
-            return BadRequest(result.Item2);
+            return result.Match<IActionResult>(
+                Right: BadRequest,
+                Left: Ok
+            );
         }
     }
 }

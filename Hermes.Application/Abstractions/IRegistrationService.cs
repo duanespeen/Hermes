@@ -1,10 +1,11 @@
 ﻿using Hermes.Domain.Models;
 using Hermes.Domain.ViewModels;
+using LanguageExt;
 
 namespace Hermes.Application.Abstractions
 {
     public interface IRegistrationService
     {   
-        public Task<(User?, string?)> RegisterAsync(RegistrationViewModel model);
+        public Task<Either<User, string>> RegisterAsync(RegistrationViewModel model);
     }
 }

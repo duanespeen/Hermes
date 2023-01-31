@@ -3,6 +3,7 @@ using Hermes.Domain.ViewModels;
 using Hermes.Application.Abstractions;
 using Hermes.Database;
 using System.Diagnostics;
+using LanguageExt;
 
 namespace Hermes.Application.Abstractions
 {
@@ -22,21 +23,21 @@ namespace Hermes.Application.Abstractions
         /// Returns the registered User IF the registration was successful. User is then used to generate JWT.
         /// Returns null if exception was thrown
         /// </returns>
-        public async Task<(User?, string?)> RegisterAsync(RegistrationViewModel model)
+        public async Task<Either<User, string>> RegisterAsync(RegistrationViewModel model)
         {
             var duplicate = _context.Users.FirstOrDefault(u =>
                 u.NormalizedUsername == model.Username.ToUpper()
             );
-
+            
             if (duplicate is not null)
             {
-                return (null, "Already exists!");
+                return "Username already exists";
             }
 
             var user = new User() { Username = model.Username, Password = model.Password, NormalizedUsername = model.Username.ToUpper() };
             _context.Add(user);
             await _context.SaveChangesAsync();
-            return (user, null);
+            return user;
         }
     }
 }
