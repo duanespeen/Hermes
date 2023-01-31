@@ -1,38 +1,43 @@
 ﻿using Hermes.Application.Abstractions;
+using Hermes.Domain.Models;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 
 namespace Hermes.Application.Services
 {
     public class JWTService : IJWTService
     {
-        private readonly string _secret;
+        private readonly IConfiguration _config;
 
-        public JWTService()
+        public JWTService(IConfiguration config)
         {
-            if (Environment.GetEnvironmentVariable("JWT_SECRET") is not null)
-            {
-                _secret = Environment.GetEnvironmentVariable("JWT_SECRET");
-            }
+            //This is just a placeholder
+            _config = config;
         }
-        public string GenerateJWT()
+        public JwtSecurityToken CreateJWT(User user)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var token = tokenHandler.CreateToken(new SecurityTokenDescriptor
-            {
-                Expires = DateTime.UtcNow.AddHours(1),
-                SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_secret)),
-                    SecurityAlgorithms.HmacSha256Signature
-                    )
-            });
-            return tokenHandler.WriteToken(token);
-        }
+            Claim[] claims = new[]{
+                    new Claim(JwtRegisteredClaimNames.Sub, _config["Jwt:Subject"]),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                    new Claim("username", user.Username),
+                    new Claim("id", user.Id.ToString())
+                };
 
-        //Validate JWT
-        
-        
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(
+                _config["Jwt:Issuer"],
+                _config["Jwt:Audience"],
+                claims,
+                expires: DateTime.Now.AddMinutes(30),
+                signingCredentials: creds
+            );
+            return token;
+        }
     }
 }
