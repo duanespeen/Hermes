@@ -1,4 +1,5 @@
-using Hermes;
+
+using Hermes.WASM;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
