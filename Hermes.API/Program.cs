@@ -1,6 +1,10 @@
 using Hermes.Application.Abstractions;
+using Hermes.Application.Services;
 using Hermes.Database;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +16,19 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSignalR();
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+    opt.RequireHttpsMetadata = false;
+    opt.SaveToken = true;
+    opt.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(s: builder.Configuration["JWT:Key"])),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
+
 //Configure Database
 builder.Services.AddDbContext<HermesContext>(options =>
     options.UseSqlite("Data Source=Hermes.db"));
@@ -21,6 +38,7 @@ builder.Services.BuildServiceProvider().GetService<HermesContext>().Database.Ens
 
 //Dependency Injection
 builder.Services.AddScoped<IRegistrationService, RegistrationService>();
+builder.Services.AddScoped<IJWTService, JWTService>();
 
 
 var app = builder.Build();

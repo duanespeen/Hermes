@@ -1,8 +1,7 @@
 ﻿using Hermes.Domain.Models;
 using Hermes.Domain.ViewModels;
-using Hermes.Application.Abstractions;
 using Hermes.Database;
-using System.Diagnostics;
+using LanguageExt.Common;
 using LanguageExt;
 
 namespace Hermes.Application.Abstractions
@@ -28,16 +27,21 @@ namespace Hermes.Application.Abstractions
             var duplicate = _context.Users.FirstOrDefault(u =>
                 u.NormalizedUsername == model.Username.ToUpper()
             );
-            
-            if (duplicate is not null)
+
+            if (duplicate != null)
             {
-                return "Username already exists";
+                return Either<User, string>.Right("Username already exists");
             }
 
-            var user = new User() { Username = model.Username, Password = model.Password, NormalizedUsername = model.Username.ToUpper() };
+            var user = new User()
+            {
+                Username = model.Username,
+                Password = model.Password,
+                NormalizedUsername = model.Username.ToUpper()
+            };
             _context.Add(user);
             await _context.SaveChangesAsync();
-            return user;
+            return Either<User, string>.Left(user);
         }
     }
 }
