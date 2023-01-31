@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hermes", "Hermes\Hermes.csproj", "{08C1E8D1-831B-4EF4-8EFA-25499994DD11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hermes.WASM", "Hermes\Hermes.WASM.csproj", "{08C1E8D1-831B-4EF4-8EFA-25499994DD11}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hermes.Domain", "Hermes.Models\Hermes.Domain.csproj", "{EB42977F-CF6A-4B70-BCA0-CF2BFC744047}"
 EndProject
@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hermes.API", "Hermes.API\He
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hermes.Application", "Hermes.Application\Hermes.Application.csproj", "{D76BF59E-2759-42DA-BEAB-71448EAFF912}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hermes.Database", "Hermes.Database\Hermes.Database.csproj", "{AA02335B-3EC0-4256-A5FD-CA1432002EAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hermes.Database", "Hermes.Database\Hermes.Database.csproj", "{AA02335B-3EC0-4256-A5FD-CA1432002EAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
