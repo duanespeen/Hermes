@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hermes.Database", "Hermes.D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7B5D1359-70BE-47EE-9E16-7EBFDFB83913}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hermes.Test", "Hermes.Test\Hermes.Test.csproj", "{A667426A-4744-434A-A687-5A25771F5CEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hermes.Test", "Hermes.Test\Hermes.Test.csproj", "{A667426A-4744-434A-A687-5A25771F5CEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

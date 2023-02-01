@@ -12,16 +12,16 @@ namespace Hermes.Test
 
         public JWTServiceTests()
         {
-            var inMemoryConfig = new Dictionary<string, string>{
-                {"JWT:Key", "testkey" },
-                { "JWT:Issuer", "test"},
-                { "JWT:Audience", "test"},
-                { "JWT:Subject", "test"}
-            };
 
             IConfiguration configuration = new ConfigurationBuilder()
-                .AddInMemoryCollection(inMemoryConfig)
-                .Build();
+                .AddInMemoryCollection(new Dictionary<string, string>
+                {
+                    {"JWT:Key", "testkey" },
+                    { "JWT:Issuer", "test"},
+                    { "JWT:Audience", "test"},
+                    { "JWT:Subject", "test"}
+                }).Build();
+
 
             _JWTService = new JWTService(configuration);
             _user = new User()
@@ -75,14 +75,14 @@ namespace Hermes.Test
         {
             // Act
             var result = _JWTService.ReadJWT(null);
-            
+
             // Assert
             Assert.Null(result);
         }
-        
+
         [Fact]
         public void CreateJWT_ValidUser_ReturnsValidToken()
-        { 
+        {
 
             //Act
             var result = _JWTService.CreateJWT(_user);
