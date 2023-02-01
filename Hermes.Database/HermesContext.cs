@@ -7,8 +7,8 @@ namespace Hermes.Database
     {
         public DbSet<User> Users { get; set; }
 
-        public HermesContext(DbContextOptions<HermesContext> options) 
-            : base(options) 
+        public HermesContext(DbContextOptions<HermesContext> options)
+            : base(options)
         {
         }
 
