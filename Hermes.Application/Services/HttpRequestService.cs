@@ -20,5 +20,23 @@ namespace Hermes.Application.Services
             var response = await Http.SendAsync(request);
             return response;
         }
+
+        public async Task<HttpResponseMessage> Post(object model, string url)
+        {
+            var response = await Http.PostAsJsonAsync(url, model);
+            return response;
+        }
+
+        public async Task<HttpResponseMessage> Get(string url)
+        {
+            var response = await Http.GetAsync(url);
+            return response;
+        }
+
+        public async Task<HttpResponseMessage> Put(object model, string url)
+        {
+            var response = await Http.PutAsJsonAsync(url, model);
+            return response;
+        }
     }
 }
