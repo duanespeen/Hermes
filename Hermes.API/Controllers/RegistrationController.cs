@@ -1,10 +1,7 @@
 ﻿using Hermes.Application.Abstractions;
 using Hermes.Domain.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace Hermes.API.Controllers
 {
@@ -18,19 +15,26 @@ namespace Hermes.API.Controllers
             _registrationService = registrationService;
             _JWTService = JWTService;
         }
-        
+
         [HttpPost]
         [Route("api/register")]
-        public async Task<IActionResult> Register(RegistrationViewModel model)
+        public async Task<IActionResult> Register([FromBody] RegistrationViewModel model)
         {
             var result = await _registrationService.RegisterAsync(model);
             return result.Match<IActionResult>(
                 Left: user =>
                 {
                     var token = _JWTService.CreateJWT(user);
-                    return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+                    var options = new CookieOptions
+                    {
+                        HttpOnly = true,
+                        SameSite = SameSiteMode.None,
+                        Expires = DateTime.UtcNow.AddMinutes(20)
+                    };
+                    HttpContext.Response.Cookies.Append("jwt", new JwtSecurityTokenHandler().WriteToken(token), options);
+                    return Ok();
                 },
-                Right: error => BadRequest(error)
+                Right: BadRequest
             );
         }
     }
