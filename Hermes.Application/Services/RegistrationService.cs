@@ -1,9 +1,8 @@
-﻿using Hermes.Domain.Models;
-using Hermes.Domain.ViewModels;
+﻿using Hermes.Application.Abstractions;
 using Hermes.Database;
-using LanguageExt.Common;
+using Hermes.Domain.Models;
+using Hermes.Domain.ViewModels;
 using LanguageExt;
-using Hermes.Application.Abstractions;
 
 namespace Hermes.Application.Services
 {
@@ -25,14 +24,10 @@ namespace Hermes.Application.Services
         /// </returns>
         public async Task<Either<User, string>> RegisterAsync(RegistrationViewModel model)
         {
-            var duplicate = _context.Users.FirstOrDefault(u =>
-                u.NormalizedUsername == model.Username.ToUpper()
-            );
+            var duplicate = _context.Users.FirstOrDefault(u => u.NormalizedUsername == model.Username.ToUpper());
 
-            if (duplicate != null)
-            {
-                return Either<User, string>.Right("Username already exists");
-            }
+            if (duplicate is not null)
+                return Either<User, string>.Right("Username is already in use.");
 
             var user = new User()
             {

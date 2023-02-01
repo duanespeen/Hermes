@@ -2,7 +2,6 @@
 using Hermes.Domain.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -44,7 +43,7 @@ namespace Hermes.Application.Services
         }
 
         public string ReadJWT(JwtSecurityToken token)
-        { 
+        {
             return token == null ? null : token.Subject;
         }
     }
