@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Hermes.Domain.ViewModels
 {
@@ -12,7 +7,7 @@ namespace Hermes.Domain.ViewModels
         [Required]
         [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long", MinimumLength = 3)]
         public string Username { get; set; }
-        
+
         [Required]
         [StringLength(128, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 12)]
         public string Password { get; set; }
