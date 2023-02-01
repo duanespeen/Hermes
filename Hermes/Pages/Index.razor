@@ -1,5 +1,11 @@
 ﻿@page "/"
+@using Hermes.Application.Abstractions;
 @using Hermes.Domain.ViewModels;
+
+@inject HttpClient Http;
+@inject NavigationManager NavigationManager;
+@inject IHttpRequestService HttpRequestService;
+
 <PageTitle>Index</PageTitle>
 
 <EditForm class="w-full h-screen flex items-center justify-center" Model="registrationViewModel" OnValidSubmit="@HandleValidSubmit">
@@ -29,8 +35,12 @@
 @code {
     private RegistrationViewModel registrationViewModel = new();
 
-    void HandleValidSubmit()
+    private async Task HandleValidSubmit()
     {
-        Console.WriteLine(registrationViewModel.ConfirmPassword);
+        var response = await HttpRequestService.PostWithCredentials(registrationViewModel, "https://localhost:7222/api/register");
+        if (response.IsSuccessStatusCode)
+        {
+            NavigationManager.NavigateTo("/chat");
+        }
     }
 }
